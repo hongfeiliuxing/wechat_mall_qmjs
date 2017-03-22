@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>拼团</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/tour_goods_detail.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+    <script type='text/javascript' src='../js/sm.min.js'></script>
+</head>
+<body>
+<div class="page">
+    <!--底部导航-->
+    <nav class="bar bar-tab">
+        <a class="tab-item tohome" href="home.html">
+            <span class="icon"><img src="../img/icon_tohome.png" alt=""></span>
+        </a>
+        <a class="tab-item contact" href="https://qmjs.qiyukf.com/client?k=9596a3336f6c95b05306a3aed1dbf803&wp=1&type=1">
+            <span class="icon"><img src="../img/icon_contact.png" alt=""></span>
+        </a>
+        <a class="tab-item add_cart">
+            <span class="tab-label">加入购物车</span>
+        </a>
+        <a class="tab-item buy_now">
+            <span class="tab-label">立即购买</span>
+        </a>
+    </nav>
+
+    <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+        <div class="list-block">
+            <ul class="list_box">
+
+            </ul>
+        </div>
+
+        <!-- 加载提示符 -->
+        <div class="infinite-scroll-preloader">
+            <div class="preloader"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/tour.js"></script>
+</html>

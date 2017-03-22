@@ -1,0 +1,39 @@
+$(document).ready(function () {
+	
+		var orgId = getLocalSession("orgId");
+		var opPhone = getLocalSession("opPhone");
+		if(orgId==""||opPhone==""){
+			xhq.gotoUrl('../html/offline_login.html')
+			return;
+		}
+		
+		$.showIndicator();
+		var param={interId:'toc.orgInfoByopPhone',phoneNo:phoneNo};
+		xhq.__runXHQ(param, function(data){
+			$.hideIndicator();
+			if (data.status == 2){
+				xhq.gotoUrl('../html/offline_login.html')
+			}else{
+				$.toast(data.message);
+				xhq.gotoUrl('../html/offline_login.html')
+			}
+		});
+	
+})
+
+
+	
+	// 输入消费码 查询 核销单子
+	$(".btn_box").on('click',function(){
+		
+		var verifyCode = $('#verifyCode').val();
+		if (verifyCode == null || verifyCode == ""){
+			$.toast("消费码未录入");
+			return;	
+		}
+		if (verifyCode.length != 8){
+			$.toast("消费码长度不正确，请检查");
+			return;	
+		}
+		xhq.gotoUrl('../html/offline_cardinfor.html',{verifyCode:verifyCode})
+	})

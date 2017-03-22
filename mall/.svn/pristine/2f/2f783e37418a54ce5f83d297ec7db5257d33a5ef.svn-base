@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>我的积分</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/my_income.css?version=2001">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+	<script type='text/javascript' src='../js/sm.min.js'></script>
+	<script type='text/javascript' src="../js/base.js?version=2001"></script>
+</head>
+<body>
+<div class="page">
+    <div class="content">
+        <div class="head_box">
+            <div class="l_radio">
+                <div class="m_radio">
+                    <p>可消费积分<br>
+                        <span><span id="withdrawMoney">0</span></span>
+                    </p>
+                    <a href="">查看积分详情<span class="icon icon-right"></span></a>
+                </div>
+            </div>
+            <div class="text">
+                <a href="">
+                    <span>消费详情</span>
+                    <span class="icon icon-right"></span>
+                </a>
+            </div>
+        </div>
+        <div class="null"></div>
+        <div class="foot_box">
+            <p class="freeze">
+                <span>冻结中积分</span>
+                <span class="span_r"><span id="blockMoney">0</span></span>
+            </p>
+            <p class="profit">
+                <a href="">
+                    <span>累计积分</span>
+                    <span class="span_r"><span id="commisionMoney">0</span></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type='text/javascript' src="../js/my_income.js?version=2001"></script>

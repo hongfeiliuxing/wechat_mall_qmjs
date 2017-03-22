@@ -1,0 +1,33 @@
+/**
+ * Created by holmes on 2017/1/17.
+ */
+// 输入消费码，点击确定  或者扫一扫之后，点击确定，出现券码信息
+$(document).on('click','.btn_box', function () {
+    var modal = $.modal({
+        afterText:  '<div class="big_box">'+
+            '<div class="up_box">'+
+                '<div class="up_l">供应商：<span>带标题的加载指示器</span></div>'+
+                '<div class="up_r">未核销</div>'+
+            '</div>'+
+            '<div class="mid_box">'+
+                '<div class="mid_l"><img src="../img/banner.png" alt=""></div>'+
+                '<div class="mid_c">'+
+                    '<div class="text_name">页面的基本结构是有要可能会出现样式错误或者无法正确加</div>'+
+                    '<div class="text_data">有效期至：<span>2017-12-24</span></div>'+
+                '</div>'+
+                '<div class="mid_r">'+
+                    '<div class="text_pri">&yen;<span>100</span></div>'+
+                    '<div class="text_num">x<span>1</span></div>'+
+                '</div>'+
+            '</div>'+
+        '</div>',
+        buttons: [
+            {
+                text: '确定使用',
+                onClick: function () {
+                    $.alert('核销成功')
+                }
+            },
+        ]
+    })
+});

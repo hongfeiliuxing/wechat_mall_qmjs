@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="../css/credit_goods_detail.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+    <script type='text/javascript' src='../js/sm.min.js'></script>
+    <script type='text/javascript' src='../js/zepto.picLazyLoad.min.js'></script>
+    <script src="../js/swiper.min.js"></script>
+</head>
+<body>
+    <div class="page">
+        <nav class="bar bar-tab">
+            <a class="tab-item credit_num">
+                <span class="tab-label">当前积分：<span>2000</span></span>
+            </a>
+            <!--积分够显示-->
+            <a class="tab-item go_pay" href="#">
+                <span class="tab-label">去兑换</span>
+            </a>
+            <!--已兑完 不可点击-->
+            <a class="tab-item no_pay" href="#">
+                <span class="tab-label">已兑完</span>
+            </a>
+            <!--积分不够显示 不可点击-->
+            <a class="tab-item no_credit" href="#">
+                <span class="tab-label">积分不足</span>
+            </a>
+        </nav>
+        <div class="content">
+            <div class="up_box"><img src="../img/banner.png" alt=""></div>
+            <div class="mid_box">
+                <div class="goods_text">这是一个段落这是一个段落这是一个段落这是一个段落这是一个段落</div>
+                <div class="goods_price"><span>200</span>积分</div>
+            </div>
+
+            <!--后台传输数据-->
+            <div class="down_box"></div>
+        </div>
+    </div>
+</body>
+</html>

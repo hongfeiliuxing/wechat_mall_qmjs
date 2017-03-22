@@ -1,0 +1,244 @@
+/**
+ * Created by holmes on 2017/1/11.
+ */
+var arrDetailInfo = null;
+var custId = getLocalSession("custId") || 0;
+var end_1;
+var end_2;
+
+//微信分享相关
+var shareConfig={};
+var shareTitle;
+var shareIcon;
+var shareUrl;
+
+var end;
+//显示截止时间倒计时
+function showEndTime(endTime,groupId){
+	//获取当前时间
+	alert(endTime);
+	var endDate = new Date(endTime);  
+    end = endDate.getTime(); 
+	//showEndTime = showEndTime(endTime,groupId);
+    var date = new Date();  
+    var now = date.getTime();  
+    //时间差  
+    var leftTime = end-now;  
+    //定义变量 h,m,s保存倒计时的时间  
+    var d,h,m,s;  
+    if (leftTime>=0) {  
+        d = Math.floor(leftTime/1000/60/60/24);  
+        h = Math.floor(leftTime/1000/60/60%24);  
+        m = Math.floor(leftTime/1000/60%60);  
+        s = Math.floor(leftTime/1000%60);                     
+    }  
+    s = h+":"+m+":"+s;
+    $("#time_"+groupId).html(s);
+}
+
+function addElement(data){
+	//alert('ADD='+JSON.stringify(data));
+	
+	var detail = data.body;
+	var list = detail.groupons;
+	var onlineId = detail.onlineId;
+	var arrStatus = new Array();
+	arrStatus[1] = '进行中';
+	arrStatus[2] = '已售完';
+	var status = detail['status'];
+	$('#status').val(status);
+	var textStatus = arrStatus[status];
+	if (status != 1){
+		$('.buy_now').css('background','rgb(156,156,156)');
+		$('.add_cart').css('background','rgb(180,180,180)');
+		$('.box_go').css('background','rgb(156,156,156)');
+	}else{
+		
+	}
+	
+	var showName = detail.showName != undefined && detail.showName != null ? detail.showName : '';
+	var purchasePrice = detail.purchasePrice != undefined && detail.purchasePrice != null ? detail.purchasePrice/100 : '';
+	var salePrice = detail.salePrice != undefined && detail.salePrice != null ? detail.salePrice/100 : '';
+	var grouponPrice = detail.grouponPrice != undefined && detail.grouponPrice != null ? detail.grouponPrice/100 : '';
+	var grouponNum = detail.grouponNum != undefined && detail.grouponNum != null ? detail.grouponNum : 0;
+	var conduct = detail.conduct != undefined && detail.conduct != null ? detail.conduct : '';
+	var status = detail.status != undefined && detail.status != null ? detail.status : 1;
+	var description = detail.description != undefined && detail.description != null ? editHTML(detail.description) : '';
+	var maintainDesction = detail.maintainDesction != undefined && detail.maintainDesction != null ? editHTML(detail.maintainDesction) : '';
+	var specDescription = detail.specDescription != undefined && detail.specDescription != null ? editHTML(detail.specDescription) : '';
+	var images = detail.images != undefined && detail.images != null ? detail.images : '';
+	
+	// 配置轮播图
+	if (images.trim() != ''){
+		var arrImages = images.split(',');
+		var swiperHtml = '<div class="swiper-wrapper">';
+		if (arrImages.length){
+			for(var j in arrImages){
+				swiperHtml += '<div class="swiper-slide"><img src="'+arrImages[j]+'" alt=""></div>';
+			}	
+		}
+		swiperHtml += '</div>'+
+		'<div class="swiper-pagination"></div>';
+		$('.swiper-container').html(swiperHtml);
+		
+	    var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        spaceBetween: 30,
+	        centeredSlides: true,
+	        autoplay: 2500,
+	        autoplayDisableOnInteraction: false
+	    });
+	}
+	
+	//配置商品名称
+	$('.goods_detail').html('<div class="tour_num"><span>'+grouponNum+'</span>人团</div>'+
+    '<div class="tour_pri">'+
+        '<span class="pri_one">&yen;<span>'+salePrice+'</span></span>'+
+        '<s class="pri_two">&yen;<span>'+purchasePrice+'</span></s>'+
+    '</div>'+
+    '<div class="tour_bri">累计销量：<span>'+grouponNum+'</span>件</div>');
+	$('.goods_text').html(showName);
+	$('.goods_bri').html(conduct);
+	
+	//配置参团列表
+	var strList = '';
+	if (list != null){
+		for(var v in list){
+			k = list[v];
+			grouponId = k.grouponId;
+			nickName = k.nickName;
+			headimgUrl = k.headimgUrl;
+			city = k.city;
+			remainNum = k.sortNum;
+			endTime = k.endTIme;
+			strList += '<div class="box_info">'+
+		    '<div class="box_pic"><img src="'+headimgUrl+'" alt=""></div>'+
+		    '<div class="box_name">'+
+		        '<div class="name_l">'+
+		            '<span class="name">'+nickName.substr(0,6)+'</span><br>'+
+		            '<span class="city">'+city+'</span>'+
+		        '</div>'+
+		        '<div class="name_r">'+
+		            '<span class="num">还差<span>'+remainNum+'</span>人成团</span><br>'+
+		            '<span class="time" id="time_'+grouponId+'">剩余'+showEndTime+'结束</span>'+
+		        '</div>'+
+		    '</div>'+
+		    '<div class="box_go" onclick="gotoOrder('+grouponId+')">去参团</div>'+
+		    '</div>';
+			setTimeout(showEndTime,1000,endTime,grouponId); 
+		}
+	}
+	$('.down_box').html(strList);
+	
+	//配置按钮
+	$('.pri_thr').html('&yen;<span>'+salePrice+'</span>');
+	$('.pri_one').html('&yen;<span>'+grouponPrice+'</span>');
+	$('.pri_beg_group').html('<span>'+grouponNum+'</span>人团');
+	
+	$('#text_one').find('.content-block').html(description);
+	$('#text_two').find('.content-block').html(maintainDesction);
+	$('#text_three').find('.content-block').html(specDescription);
+	$('.test-lazyload').picLazyLoad({ threshold: 100});
+     
+}
+
+function getDetail(onlineId, custId){
+	//alert(onlineId);
+	if (onlineId != undefined && custId != undefined && onlineId != null && custId != null){
+		var param={'interId':'toc.getGrouponDetail','channel':'C','onlineId':onlineId,'custId':custId};
+		xhq.__runXHQ(param, function(data){
+			// 检测返回值
+			//alert(JSON.stringify(data));
+			console.log('toc.getOnlineDetail='+JSON.stringify(data));
+			if (data.status == 0){
+				var body = data.body;
+				arrDetailInfo = body;
+				addElement(data);
+				
+				// 微信分享设置
+				var fromStr = getLocalSession("userType") == 2 ? "&fromCustId="+custId : ''; //1:游客，2:会员
+				shareTitle = data.body.showName||"全民集市精品分享";
+				shareIcon=data.body.bigPic;
+				shareUrl=xhq.getDomainUrl()+"tour_goods_detail.html?onlineId="+onlineId+fromStr;
+				shareConfig={
+					    title: shareTitle, 
+					    desc: "我在全民集市发现了一个不错的商品，快来看看吧。",
+					    link: shareUrl,
+					    imgUrl: shareIcon
+					};
+				
+				xhq.initWXJsConfig();
+			}else{
+				$.toast(data.message);
+			}
+		});
+	}
+}
+
+function setBuyNowLocalSession(arrDetailInfo){
+	setLocalSession('localOrderSession', null);
+	var shoppingCart;
+	if (arrDetailInfo != null){
+		var row = getBuyJSON(arrDetailInfo);
+		var body = new Array();
+		var input_num = $('.num_handle');
+		row.num = parseInt(input_num.val());
+		body[0] = row;
+		shoppingCart = {'body':body};
+		
+		var json = JSON.stringify(shoppingCart);
+		setLocalSession('localOrderSession', json);
+		console.log('LocalSession=' + getLocalSession('localOrderSession'));
+	}
+}
+
+function gotoOrder(groupId){
+	if ($('#status').val() == 1){
+		setBuyNowLocalSession(arrDetailInfo);
+		var params = groupId ? {mailType:'lkgm','channelType':4,'sourceType':4,'groupId':groupId} : {mailType:'lkgm','channelType':4,'sourceType':4};
+		xhq.gotoUrl("order.html",params); //mallType 代表从下单进入
+	}
+}
+
+$(function () {
+
+	var onlineId = getUrlParam('online_id');
+	onlineId = parseInt(onlineId);
+	getDetail(onlineId, custId);
+	
+	// 商品数量增加
+	$(".add").on('tap',function(){
+	         var input_num = $('.num_handle');
+	         input_num.val(parseInt(input_num.val())+1);
+	});
+	// 商品数量减少
+	$(".subtract").on('tap',function() {
+		var input_num = $('.num_handle');
+        input_num.val(parseInt(input_num.val()) - 1);
+        if (parseInt(input_num.val()) < 1) {
+            input_num.val(1);
+        }
+    });
+
+    // 点击弹出拼团规则
+    $(document).on('click','.alert-text',function () {
+        $.alert('这里是拼团规则列表', '温馨提示');
+    });
+	
+	// 点击加入到购物车数量增加
+	$('.add_cart').on('tap',function(){
+		gotoOrder(0);
+	});
+	
+	// 点击加入到购物车数量增加
+	$('.buy_now').on('tap',function(){
+		gotoOrder(0);
+	});
+	
+	wx.ready(function () {
+		wx.onMenuShareAppMessage(shareConfig);	
+		wx.onMenuShareTimeline(shareConfig);
+    });
+});
+$.init()

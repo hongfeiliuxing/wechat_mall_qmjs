@@ -1,0 +1,19 @@
+/**
+ * Created by holmes on 2017/2/4.
+ */
+
+
+ $(function () {
+     // 当前积分足够兑换，显示
+     $('.bar-tab').find('.go_pay').show().nextAll().hide();
+
+     // 当前商品被兑换完，显示
+     $('.bar-tab').find('.no_pay').show();
+     $('.go_pay').hide();
+     $('.no_credit').hide();
+
+     // 积分不够显示
+     $('.bar-tab').find('.no_credit').show();
+     $('.go_pay').hide();
+     $('.no_pay').hide();
+ });

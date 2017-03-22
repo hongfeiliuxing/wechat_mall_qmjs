@@ -1,0 +1,99 @@
+.page {
+  background: #f8f8f8;
+  font-family: PingFangSC-Regular !important;
+}
+.page .bar-tab {
+  line-height: 2.5rem;
+  display: flex;
+  display: -webkit-flex;
+  background: #ffffff;
+}
+.page .bar-tab .tab-item .tab-label {
+  font-size: .8rem;
+  font-weight: 300;
+}
+.page .bar-tab .tab-item .tab-label span {
+  color: #de3f37;
+}
+.page .bar-tab .credit_num {
+  flex: 2;
+  -webkit-flex: 2;
+  text-align: left;
+  padding-left: 1rem;
+}
+.page .bar-tab .go_pay {
+  display: block;
+  flex: 1;
+  -webkit-flex: 1;
+  background: #de3f37;
+}
+.page .bar-tab .go_pay .tab-label {
+  color: #ffffff;
+}
+.page .bar-tab .no_credit {
+  display: none;
+  flex: 1;
+  -webkit-flex: 1;
+  background: #d2d2d2;
+  pointer-events: none;
+}
+.page .bar-tab .no_credit .tab-label {
+  color: #ffffff;
+}
+.page .bar-tab .no_pay {
+  display: none;
+  flex: 1;
+  -webkit-flex: 1;
+  background: #d2d2d2;
+  pointer-events: none;
+}
+.page .bar-tab .no_pay .tab-label {
+  color: #ffffff;
+}
+.page .content .up_box {
+  height: auto;
+}
+.page .content .up_box img {
+  width: 100%;
+  height: auto;
+}
+.page .content .mid_box {
+  background: #ffffff;
+  padding: 0.5rem;
+  font-size: .75rem;
+  font-weight: 300;
+}
+.page .content .mid_box .goods_text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.page .content .mid_box .goods_price {
+  color: #de3f37;
+  margin-top: .3rem;
+}
+.page .content .goods_info {
+  margin-top: .5rem;
+}
+.page .content .goods_info .button {
+  font-size: .8rem;
+}
+.page .content .goods_info .button.active {
+  color: #5f646e;
+  border-color: #de3f37;
+}
+.page .content .tabs .tab .content-block {
+  margin: 0;
+  padding: .5rem 0.1rem;
+  width: 100%;
+  overflow-x: hidden;
+}
+@media (max-width: 320px) {
+  .page .content .mid_box {
+    font-size: .7rem;
+  }
+  .page .content .goods_info .button {
+    font-size: .75rem;
+  }
+}

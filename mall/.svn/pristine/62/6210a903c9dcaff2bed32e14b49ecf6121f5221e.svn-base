@@ -1,0 +1,112 @@
+.page {
+  background: #f7f7f7;
+  font-family: "PingFangSC-Regular" !important;
+}
+.page .content {
+  width: 100%;
+}
+.page .content .head_box {
+  width: 90%;
+  margin: 0 auto;
+}
+.page .content .head_box .l_radio {
+  width: 10rem;
+  height: 10rem;
+  margin: 1rem auto;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  position: relative;
+}
+.page .content .head_box .l_radio .m_radio {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 86%;
+  width: 86%;
+  margin: -43% 0 0 -43%;
+  background: #f9ae39;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  text-align: center;
+}
+.page .content .head_box .l_radio .m_radio p {
+  margin-top: 25%;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 300;
+}
+.page .content .head_box .l_radio .m_radio p span {
+  display: inline-block;
+  margin-top: -0.2rem;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+.page .content .head_box .l_radio .m_radio a {
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 300;
+}
+.page .content .head_box .l_radio .m_radio a .icon{
+  margin-top: -.1rem;
+}
+.page .content .head_box .text {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: 2.8rem;
+  line-height: 2.8rem;
+}
+.page .content .head_box .text a {
+  color: #000000;
+  width: 100%;
+  display: inline-flex;
+  display: -webkit-inline-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.page .content .head_box .text a span {
+  flex: 1;
+  -webkit-flex: 1;
+}
+.page .content .head_box .text a .icon {
+  text-align: right;
+}
+.page .content .null {
+  height: .5rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+.page .content .foot_box {
+  width: 90%;
+  margin: 0 auto;
+}
+.page .content .foot_box p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #000000;
+  display: flex;
+  display: -webkit-flex;
+}
+.page .content .foot_box p span {
+  flex: 1;
+  -webkit-flex: 1;
+}
+.page .content .foot_box p .span_r {
+  text-align: right;
+}
+.page .content .foot_box .freeze {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: .5rem;
+}
+.page .content .foot_box .profit a {
+  color: #000000;
+  width: 100%;
+  display: inline-flex;
+  display: -webkit-inline-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.page .content .foot_box .profit a .span_r .icon {
+  margin-top: -0.1rem;
+  margin-left: .2rem;
+  display: inline-block;
+}

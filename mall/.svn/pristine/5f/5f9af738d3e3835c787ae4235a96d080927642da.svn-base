@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>店铺管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/ws_manage_shop.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+	<script type='text/javascript' src='../js/sm.min.js'></script>
+	<script type='text/javascript' src="../js/base.js?version=2001"></script>
+	<script src="https://qiyukf.com/script/9596a3336f6c95b05306a3aed1dbf803.js" defer async></script>
+</head>
+<body>
+<div class="page">
+    <div class="content">
+        <div class="up_box">
+            <div class="box_l">
+                <div class="img_box">
+                    <img src="../img/banner.png" alt="">
+                </div>
+            </div>
+
+            <div class="box_m">
+                <div class="ship_box">
+                    <span>店长</span>
+                    <span>我一讲你就笑的店铺店铺店铺店铺</span>
+                </div>
+            </div>
+            <div class="box_r"><img src="../img/icon_dian@1x.png" alt=""></div>
+        </div>
+
+        <div class="content-block selling_box infinite-scroll infinite-scroll-bottom">
+            <!-- 下面是正文 -->
+            <div class="con-block">
+                <ul class="list_container">
+                    <!--店铺第一个商品-->
+                    <li class="f_li">
+                        <div class="li_l">
+                            <img src="http://qmjsgood.b0.upaiyun.com/20161222/345d05ca17e4b69f073b5564bc0798c0.jpg!s" alt="">
+                        </div>
+                        <div class="li_r">
+                            <div class="up_con">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+                            <div class="mid_con">
+                                <div class="pri_l">
+                                    <p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+                                </div>
+                                <div class="pri_r">赚: ¥<span>199</span></div>
+                            </div>
+                            <div class="down_con">
+                                <div class="sur_l">
+                                    <p class="surplus">
+                                        <span class="span_f"></span>
+                                        <span class="span_s">剩余<span>98</span>个</span>
+                                    </p>
+                                </div>
+                                <div class="sur_m">
+                                    <img src="../img/icon_delete@2x.png" alt="">
+                                </div>
+                                <div class="sur_r">
+                                    <img src="../img/icon_up@2x.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--店铺其他商品-->
+                    <li>
+                        <div class="li_l">
+                            <img src="../img/banner.png" alt="">
+                        </div>
+                        <div class="li_r">
+                            <div class="up_con">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+                            <div class="mid_con">
+                                <div class="pri_l">
+                                    <p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+                                </div>
+                                <div class="pri_r">赚: ¥<span>199</span></div>
+                            </div>
+                            <div class="down_con">
+                                <div class="sur_l">
+                                    <p class="surplus">
+                                        <span class="span_f"></span>
+                                        <span class="span_s">剩余<span>98</span>个</span>
+                                    </p>
+                                </div>
+                                <div class="sur_m">
+                                    <img src="../img/icon_delete@2x.png" alt="">
+                                </div>
+                                <div class="sur_r">
+                                    <img src="../img/icon_up_active%20@2x.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+        <div class="cover" style="display: none;">
+            <div class="dialog_window">
+                <div class="window_content">你确定要删除这个商品吗？</div>
+                <div class="window_footer">
+                    <div class="btn_cancle">取消</div>
+                    <div class="btn_confirm">确定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type='text/javascript' src="../js/ws_manage_shop.js"></script>
+</html>

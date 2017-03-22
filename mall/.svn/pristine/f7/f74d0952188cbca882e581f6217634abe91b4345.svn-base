@@ -1,0 +1,40 @@
+// 支付成功 ＝＝ 查看订单
+$("#order-card").click(function(){
+	window.location.href = "../html/order_list.html"
+})
+// 支付成功 ＝＝ 返回首页
+$("#index").click(function(){
+    window.location.href = "../html/home.html"
+})
+
+////拼团成功 ＝＝返回首页
+$(".back_btn").click(function(){
+    window.location.href = "../html/home.html"
+})
+
+//拼团成功 ＝＝ 分享参团
+$(".share_btn").click(function(){
+	var groupId =  xhq.getQuery("groupId") || ""
+	var orderNo =  xhq.getQuery("orderNo") || ""
+	var channelType =  xhq.getQuery("channelType") || ""
+    xhq.gotoUrl('../html/tour_goods_share.html',{grouponId:groupId})
+})
+
+$(document).ready(function () {
+	var orderNo =  xhq.getQuery("orderNo") || ""
+    var channelType =  xhq.getQuery("channelType") || ""
+     $("#orderNo").html(orderNo)
+	
+	try{
+		
+		//从购物车按钮下单的，清除购物车商品信息
+		var unCheckShoppingCartLocalSession = getLocalSession("unCheckShoppingCartLocalSession");
+		if(unCheckShoppingCartLocalSession!=null && unCheckShoppingCartLocalSession != undefined && unCheckShoppingCartLocalSession!=''){
+			setLocalSession("shoppingCartLocalSession", unCheckShoppingCartLocalSession)
+			setLocalSession("unCheckShoppingCartLocalSession", "")
+		}
+	}catch(err){
+		console.log(err);
+	}
+	
+})

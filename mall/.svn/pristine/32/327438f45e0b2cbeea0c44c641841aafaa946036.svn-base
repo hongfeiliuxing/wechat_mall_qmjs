@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>订单详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/offline_cardinfor.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+    <script type='text/javascript' src='../js/sm.min.js'></script>
+    <script type='text/javascript' src="../js/base.js"></script>
+</head>
+<body>
+    <div class="page">
+        <nav class="bar bar-tab">
+            <a class="tab-item" href="#">
+                <span class="tab-label">确定核销</span>
+            </a>
+        </nav>
+        <div class="content">
+            <!--券码未消费-->
+            <div class="big_box" style="display: none">
+                <div class="mid_box">
+                     <div class="mid_l"><img src="../img/banner.png" alt=""></div>
+                     <div class="mid_c">
+                         <div class="text_name">页面的基本结构是有要可构是有要可能会出现样式错误或者无法正确加</div>
+                         <div class="text_box">
+                             <div class="text_pri">&yen;<span>100</span></div>
+                             <div class="text_num">x<span>1</span></div>
+                         </div>
+                     </div>
+                </div>
+
+                <div class="up_box">
+                    <div class="up_l">商家信息:</div>
+                    <div class="up_name">老娘西湖区文三西湖区文三西湖区文三西湖区文三舅</div>
+                </div>
+                <div class="code_infor">消费券码：<span>88888888</span></div>
+                <div class="con_box">
+                    <div class="text_data">有效期至：<span>2017-12-24</span></div>
+                    <div class="up_state">未消费</div>
+                </div>
+            </div>
+
+            <!--券码已消费-->
+            <div class="big_box end" >
+                <div class="mid_box">
+                    <div class="mid_l"><img src="../img/banner.png" alt=""></div>
+                    <div class="mid_c">
+                        <div class="text_name">页面的基本结构是有要可构是有要可能会出现样式错误或者无法正确加</div>
+                        <div class="text_box">
+                            <div class="text_pri">&yen;<span>100</span></div>
+                            <div class="text_num">x<span>1</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="up_box">
+                    <div class="up_l">商家信息:</div>
+                    <div class="up_name">老娘西湖区文三西湖区文三西湖区文三西湖区文三舅</div>
+                </div>
+                <div class="code_infor">消费券码：<span>88888888</span></div>
+                <div class="con_box">
+                    <div class="text_data">核销时间：<span>2017-1-16</span></div>
+                    <div class="up_state">已消费</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

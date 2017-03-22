@@ -1,0 +1,550 @@
+var count = 0;
+var countConduct = 0;
+var oldOnlineId = 0;
+var arrNum = new Array();
+var arrDetailInfo = null;
+
+//微信分享相关
+var shareConfig={};
+var shareTitle;
+var shareIcon;
+var shareUrl;
+
+var openId = getLocalSession("openid") || "";
+var custId = getLocalSession("custId") || "";
+
+/**
+ * 
+ * @param object
+ *  e.g.: {"bigPic":"http://file.cdn.xiaohongquan.cn/20161130/a5ca1b2626774fc709347fe0e0093496.jpg  ","specDescription":"<p>G</p>","status":1,"spuId":10,"onlineId":6,"ggs":[{"ggValue":"T1Gsdf DG","online_id":6},{"ggValue":"T1Gsdf DG","online_id":13},{"ggValue":"T1GHHHHtest DG","online_id":20}],"maintainDesction":"<p>H</p>","showName":"hkliiytrterewe3wwdsddsd","description":"<p>F</p>","skuId":7,"money":800,"images":"http://file.cdn.xiaohongquan.cn/20161130/431a3d0b3b606a66ed57ed07544a8cf9.jpg","salePrice":600,"channel":1,"purchasePrice":600}
+ */
+function getJSON(object)
+{
+	if (object != null && parseInt(object.onlineId) != 0){
+		var json = {
+			"showName":object.showName,
+			"money": object.money,
+			"salePrice": object.salePrice,
+			"onlineId": object.onlineId,
+			"bigPic": object.bigPic,
+			"goodId": object.skuId,
+			"mailMoney": object.mailMoney,
+			"purchasePrice": object.purchasePrice,
+			"num": 0};
+	}
+	return json;
+}
+
+function addElement(data){
+	//alert('ADD='+JSON.stringify(data));
+	
+	var detail = data;
+	var onlineId = detail.onlineId;
+	var arrStatus = new Array();
+	arrStatus[1] = '进行中';
+	arrStatus[2] = '已售完';
+	arrStatus[3] = '未开始';
+	arrStatus[4] = '已结束';
+	var status = detail['status'];
+	$('#status').val(status);
+	var textStatus = arrStatus[status];
+	var clsSpec = 'spec_list';
+	//alert(textStatus);
+	for (var i in detail) {
+		var val = detail[i];
+		switch (i) {
+			case 'showName': // 加载产品标题简介
+				var showName = val;
+				break;
+			case 'salePrice':
+				var salePrice = val/100;
+				break;
+			case 'purchasePrice':
+				var purchasePrice = val/100;
+				break;
+			case 'money':
+				var money = val;
+				break;
+			case 'ggs': // 加载产品规格
+				var propertys = val;
+				var hidGgs = $('#clickGgs').val();
+				hidGgs = hidGgs.toString();
+				hidGgs.trim();
+				if (propertys.length){
+					var spec_itemHtml = ''
+					var id, value, txtId;
+					for(var j in propertys){
+						id = propertys[j]['online_id'];
+						value = propertys[j]['ggValue'];
+						txtId = value+id;
+						txtId = txtId.toString();
+						txtId.trim();
+						clsSpec = 'spec_list';
+						if (!count) {
+							clsSpec = (onlineId == id ? 'spec_list active' : clsSpec);
+							if (clsSpec == 'spec_list active') $('#clickGgs').val(value+id);
+						}
+						else clsSpec = (hidGgs == txtId ? 'spec_list active' : clsSpec);
+						spec_itemHtml += '<span class="'+clsSpec+'" id="'+value+id+'" onclick="clickGgs('+id+',this)" name="cliGgs">'+value+'</span> ';
+					}
+					$('.spec_item').html(spec_itemHtml);
+				}
+				break;
+			case 'description':
+				val = editHTML(val);
+				$('.text_goods').html(val);
+				/*
+				$('.text_goods img').addClass('test-lazyload');
+				$('.text_goods img').each(function(index){
+					var src = $('.text_goods img').eq(index).attr('src');
+					$('.text_goods img').eq(index).attr('data-original', src);
+					 console.log($('.text_goods img').eq(index).attr('src'));
+					});
+				$('.text_goods img').attr('src','../img/blank.png');
+				$('.test-lazyload').picLazyLoad({ threshold: 100});
+				console.log($('.text_goods').html());
+				*/
+				
+				break;
+			case 'specDescription':
+				val = editHTML(val);
+				$('.parameter').html(val);
+				break;
+			case 'maintainDesction':
+				val = editHTML(val);
+				$('.to_know').html(val);
+				break;
+			case 'images':
+				// 加载轮播图
+				var arrImages = val.split(',');
+				var swiperHtml = '<div class="swiper-wrapper">';
+				if (arrImages.length){
+					for(var j in arrImages){
+						swiperHtml += '<div class="swiper-slide"><img src="'+arrImages[j]+'" alt=""></div>';
+					}	
+				}
+				swiperHtml += '</div>'+
+				'<div class="swiper-pagination"></div>';
+				$('.swiper-container').html(swiperHtml);
+				
+				
+				// 配置轮播图
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					spaceBetween: 30,
+					centeredSlides: true,
+					autoplay: 2500,
+					autoplayDisableOnInteraction: false
+				});
+				break;
+			case 'startTime':
+				var startTime = val;
+				break;
+			case 'endTime':
+				var endTime = val;
+				break;
+			case 'channel':
+				if (val == 2){
+					$('.tohome').hide();
+					$('.contact').hide();
+					$('.add_cart').hide();
+					$('.cart').hide();
+					$('.subtract').unbind("tap");
+					$('.add').unbind("tap");
+				}else{
+					$('.tohome').show();
+					$('.contact').show();
+					$('.add_cart').show();
+					$('.cart').show();
+					$('.subtract').bind("tap");
+					$('.add').bind("tap");
+				}
+				break;
+		}
+	}
+	
+	$('.test-lazyload').picLazyLoad({ threshold: 100});
+	
+	 var cartTotal = 0;
+	 var shopcart = getLocalSession('shoppingCartLocalSession');
+	 
+	 if (shopcart != null && shopcart != undefined && shopcart.search('{') != -1){
+		 var cart = JSON.parse(shopcart);
+		 if (cart.body != null){
+			cartTotal =  cart.body.length;
+			$(".cart .badge").html(cartTotal);
+		 }
+	 }
+	 
+	 // 商品状态
+	var txtPurchasePrice = parseInt(purchasePrice) == 0 || purchasePrice == undefined ? '' : '<span class="price_two">&yen;'+purchasePrice+'</span>';
+	var txtEndTime = parseInt(endTime) == 0 || endTime == undefined ? '' : '<span class="end_time"><span>'+endTime+'</span>结束</span>';
+	var txtStartTime = parseInt(startTime) == 0 || startTime == undefined ? '' : '<span class="end_time"><span>'+startTime+'</span>开始抢购<span>';
+	briefHtml = '<div class="brief_title">'+showName+'</div>';
+    switch (status){
+		case 1:
+		// 进行中
+		$('.goods_state').children('img').attr('src','../img/jinxingzhong.png');
+		$('.badge').css('background','rgb(222,63,55)');
+		$('.buy_now').css('background','rgb(222,63,55)');
+		$('.add_cart').css('background','rgb(249,174,57)');
+		briefHtml += '<div class="brief_price">'+
+            '<p><span class="price_one">特卖价</span><span class="span_m">&yen;'+salePrice+'</span>'+txtPurchasePrice+'<br>'+
+                '<span class="price_three">送积分：<span class="bonus">'+money+'</span></span>'+txtEndTime+
+            '</p>'+
+        '</div>';
+		break;
+		case 2:	
+		// 已售完
+		$('.goods_state').children('img').attr('src','../img/yishouwan.png');
+		$('.badge').css('background','rgb(156,156,156)');
+		$('.buy_now').css('background','rgb(156,156,156)');
+		$('.add_cart').css('background','rgb(180,180,180)');
+		briefHtml += '<div class="brief_price">'+
+            '<p><span class="price_one">特卖价</span><span class="span_m">&yen;'+salePrice+'</span>'+txtPurchasePrice+'<br>'+
+                '<span class="price_three">送积分：<span class="bonus">'+money+'</span></span>'+
+            '</p>'+
+        '</div>';
+		break;
+		case 3:	
+		// 未开始
+			$('.goods_state').children('img').attr('src','../img/weikaishi.png');
+			$('.badge').css('background','rgb(156,156,156)');
+			$('.buy_now').css('background','rgb(156,156,156)');
+			$('.add_cart').css('background','rgb(180,180,180)');
+			briefHtml += '<div class="brief_price">'+
+	            '<p><span class="price_one">特卖价</span><span class="span_m">&yen;'+salePrice+'</span>'+txtPurchasePrice+'<br>'+
+	                '<span class="price_three">送积分：<span class="bonus">'+money+'</span></span>'+txtStartTime+
+	            '</p>'+
+	        '</div>';
+		break;
+		default: 
+		// 已结束
+			$('.goods_state').children('img').attr('src','../img/yijieshu.png');
+			$('.badge').css('background','rgb(156,156,156)');
+			$('.buy_now').css('background','rgb(156,156,156)');
+			$('.add_cart').css('background','rgb(180,180,180)');
+			briefHtml += '<div class="brief_price">'+
+		        '<p><span class="price_one">特卖价</span><span class="span_m">&yen;'+salePrice+'</span>'+txtPurchasePrice+'<br>'+
+		            '<span class="price_three">送积分：<span class="bonus">'+money+'</span></span>'+
+		        '</p>'+
+		    '</div>';
+		break;
+	}
+    
+	$('.goods_brief').html(briefHtml);
+     
+}
+
+function addConductElement(data){
+	//alert('conduct='+JSON.stringify(data));
+	var val;
+	if (data != undefined && data.length > 0){
+		var first = data[0];
+		for(var i in first){
+			val = first[i];
+			switch (i){
+				case 'images':
+					var document_picHtml = '';
+					var arrOthImages = val.split(',');
+					if (arrOthImages.length){
+						for(var j in arrOthImages){
+							document_picHtml += '<div class="pic_item"><img src="'+arrOthImages[j]+'" alt=""></div>';
+						}	
+					}
+					$('.document_pic').html(document_picHtml);
+					
+					break;
+				case 'conduct':
+					$('.document_span').html(val);
+					break;
+			}
+		}
+	}
+}
+
+/*
+function saveImages(){
+	
+	var mycanvas = document.getElementById("thecanvas");  
+    var image    = mycanvas.toDataURL("image/png");  
+    var w=window.open('about:blank','image from canvas'); 
+   
+}
+
+function SaveAs5(imgURL)
+{
+    var oPop = window.open(imgURL,"","width=1, height=1, top=5000, left=5000");
+    for(; oPop.document.readyState != "complete"; )
+    {
+        if (oPop.document.readyState == "complete")break;
+    }
+    oPop.document.execCommand("SaveAs");
+    oPop.close();
+}
+ */
+
+function getDetail(onlineId){
+	//alert(onlineId);
+	if (!count || oldOnlineId != onlineId){
+		var param={'interId':'toc.getOnlineDetail','channel':'C','onlineId':onlineId};
+		xhq.__runXHQ(param, function(data){
+			// 检测返回值
+			//console.log('toc.getOnlineDetail='+JSON.stringify(data));
+			if (data.status == 0){
+				var body = data.body;
+				arrDetailInfo = body;
+				setLocalSession('detailInfoLocalSession_'+onlineId, JSON.stringify(body));
+				$("#cache").data(data)
+				addElement(body);
+				count++;
+				
+				// 微信分享设置
+				var fromStr = getLocalSession("userType") == 2 ? "&fromCustId="+custId : ''; //1:游客，2:会员
+				shareTitle = data.body.showName||"全民集市精品分享";
+				shareIcon=data.body.bigPic;
+				shareUrl=xhq.getDomainUrl()+"share_goods_detail.html?onlineId="+onlineId+fromStr;
+				shareConfig={
+					    title: shareTitle, 
+					    desc: "我在全民集市发现了一个不错的商品，快来看看吧。",
+					    link: shareUrl,
+					    imgUrl: shareIcon
+					};
+				
+				xhq.initWXJsConfig();
+			}else{
+				$.toast(data.message);
+			}
+		});
+	}
+}
+
+function getConduct(onlineId){
+	
+	if (! countConduct || oldOnlineId != onlineId){
+		var param={interId:'toc.getOnlineConduct',channel:'C',onlineId:onlineId};
+		xhq.__runXHQ(param, function(data){
+			//alert('ADD='+JSON.stringify(data));
+			//console.log('toc.getOnlineConduct='+JSON.stringify(data))
+			// 检测返回值
+			if (data.status == 0){
+				var body = data.body;
+				addConductElement(body);
+				countConduct++;
+			}else{
+				$.toast(data.message);
+			}
+		});
+	}
+}
+
+function clickGgs(onlineId, object){
+	$(object).addClass('active');
+	var id = $(object).attr('id');
+	$('#clickGgs').val(id);
+	//$('[name=cliGgs]').removeClass('active');
+	//$(object).addClass('active');
+	getDetail(onlineId);
+	oldOnlineId = onlineId;
+	$('#onlineId').val(onlineId);
+}
+
+
+$(function () {
+	// 校验openid
+	//setLocalSession("custId",null);
+	//setLocalSession("openid",null);
+    if (openId == "" || custId == "") {
+        $.toast("未获取到用户资料，无法访问");
+        xhq.gotoErrorPage();
+        return;
+    }
+    //alert(getLocalSession("userType"));
+	//setLocalSession('shoppingCartLocalSession', null);
+	setLocalSession('localOrderSession', null);
+	var onlineId = getUrlParam('onlineId');
+	onlineId = parseInt(onlineId);
+	getDetail(onlineId);
+	oldOnlineId = onlineId;
+	$('#onlineId').val(onlineId);
+	$('#addCart').show();
+	
+	$('#goods_detail_tab').on('tap',function(){
+		$('#goods_detail_tab').addClass('active');
+		$('#goods_document_tab').removeClass('active');
+		$('#goods_detail').show();
+		$('#goods_document').hide();
+		$('#addCart').show();
+	});
+	
+	$('#goods_document_tab').on('tap',function(){
+		$('#goods_detail_tab').removeClass('active');
+		$('#goods_document_tab').addClass('active');
+		$('#goods_detail').hide();
+		$('#goods_document').show();
+		$('#addCart').hide();
+		getConduct(oldOnlineId);
+	});
+	
+	// 商品数量增加
+	$(".add").on('tap',function(){
+	         var input_num = $('.num_handle');
+	         input_num.val(parseInt(input_num.val())+1);
+	});
+	// 商品数量减少
+	$(".subtract").on('tap',function() {
+		var input_num = $('.num_handle');
+        input_num.val(parseInt(input_num.val()) - 1);
+        if (parseInt(input_num.val()) < 1) {
+            input_num.val(1);
+        }
+    });
+
+	// 点击加入到购物车数量增加
+	$('.add_cart').on('tap',function(){
+		if (parseInt($('#status').val()) == 1){
+			// 判断会员状态
+		    var userType = getLocalSession("userType");
+			
+			if ($('#clickGgs').val() == ''){
+				$.toast("请选择一个规格");
+				return;
+			}
+			var input_num = $('.num_handle');
+			var $cart_num = $(".cart .badge");
+			//$cart_num.html(parseInt($cart_num.html()) + parseInt(input_num.val()));
+			 
+			var onlineId = $('#onlineId').val();
+			var exist = false;
+			var body = new Array();
+			var shoppingCart;
+			var i = 0;
+			var total = 0;
+			//alert(getLocalSession('shoppingCartLocalSession'));
+			//alert(JSON.stringify(arrDetailInfo));
+			var oldShoppingCart = getLocalSession('shoppingCartLocalSession');
+			if (oldShoppingCart != null && oldShoppingCart != undefined && oldShoppingCart.search('{') != -1){
+				shoppingCart = JSON.parse(oldShoppingCart);
+				if (shoppingCart.body !=  null && shoppingCart.body != undefined){
+					var body = shoppingCart.body;
+					var total = body.length;
+					if (total){
+						for(var i in body){
+							thisId = body[i].onlineId;
+							if (thisId == onlineId){
+								body[i].num += parseInt(input_num.val());
+								exist = true;
+							}
+						}
+				     }
+					if (!exist){
+						var row = getJSON(arrDetailInfo);
+						row.num = parseInt(input_num.val());
+						body[total++] = row;
+					}
+					shoppingCart.body = body;
+				}
+			}else{
+				if (arrDetailInfo != null){
+					var row = getJSON(arrDetailInfo);
+					row.num = parseInt(input_num.val());
+					body[0] = row;
+					total++;
+					shoppingCart = {'body':body};
+				}
+			}
+			
+			if (shoppingCart != null){
+				var json = JSON.stringify(shoppingCart);
+				setLocalSession('shoppingCartLocalSession', json);
+				$.toast('添加成功，在购物车等亲');
+				//console.log('shoppingCartLocalSession=' + getLocalSession('shoppingCartLocalSession'));
+				$cart_num.html(parseInt(total));
+			}
+		}
+	});
+	
+	// 点击加入到购物车数量增加
+	$('.buy_now').on('tap',function(){
+		
+		if (parseInt($('#status').val()) == 1){
+			// 判断会员状态
+		    var userType = getLocalSession("userType");
+
+			if ($('#clickGgs').val() == ''){
+				$.toast("请选择一个规格");
+				return;
+			}
+			
+			var input_num = $('.num_handle');
+			var $cart_num = $(".cart .badge");
+			//$cart_num.html(parseInt($cart_num.html()) + parseInt(input_num.val()));
+			 
+			var onlineId = $('#onlineId').val();
+			var exist = false;
+			var body = new Array();
+			var shoppingCart;
+			var i = 0;
+			var total = 0;
+			//alert(getLocalSession('shoppingCartLocalSession'));
+			//alert(JSON.stringify(arrDetailInfo));
+			var shoppingCart = JSON.parse(getLocalSession('localOrderSession'));
+			//alert(shoppingCart);
+			if (shoppingCart !== null){
+				var body = shoppingCart;
+				var total = body.length;
+				if (total){
+					for(var i in body){
+						thisId = body[i].onlineId;
+						if (thisId == onlineId){
+							body[i].num += parseInt(input_num.val());
+							exist = true;
+						}
+					}
+			     }
+				if (!exist){
+					var row = getBuyJSON(arrDetailInfo);
+					row.num = parseInt(input_num.val());
+					body[total++] = row;
+				}
+				shoppingCart = body;
+			}else{
+				if (arrDetailInfo != null){
+					var row = getBuyJSON(arrDetailInfo);
+					row.num = parseInt(input_num.val());
+					body[0] = row;
+					total++;
+					shoppingCart = body;
+				}
+			}
+			if (shoppingCart != null){
+				var json = JSON.stringify(shoppingCart);
+				setLocalSession('localOrderSession', json);
+				
+				//alert(getLocalSession('localOrderSession'));
+				//console.log('localOrderSession=' + getLocalSession('localOrderSession'));
+				xhq.gotoUrl("order.html",{mailType:'lkgm'});
+				//$cart_num.html(parseInt(total));
+			}
+		}
+	});
+	 
+	 $(".cart").on('tap',function() {
+		if (parseInt($('#status').val()) == 1){
+			// 判断会员状态
+		    var userType = getLocalSession("userType");
+			xhq.gotoUrl("shoppingcart.html",{});
+		}
+	});
+
+    // 复制文案
+    $(".copy_document").on('tap',function () {
+		$(".document_span").addClass('active')
+	})
+	
+	wx.ready(function () {
+		wx.onMenuShareAppMessage(shareConfig);	
+		wx.onMenuShareTimeline(shareConfig);
+    });
+});

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>全民集市</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/swiper.min.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+    <script type='text/javascript' src='../js/sm.min.js'></script>
+    <!--<script type='text/javascript' src='../js/base.js?version=2001'></script>-->
+    <script type='text/javascript' src="../js/swiper.min.js"></script>
+</head>
+<body>
+<div class="page" id="page-ptr">
+    <!--底部导航-->
+    <nav class="bar bar-tab">
+        <a class="tab-item active home" href="#">
+            <span class="icon"><img src="../img/icoHomeActi@2x.png" alt="首页"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <!--<a id="toshop" class="tab-item shop" href="#" data-transition='slide-in'>-->
+            <!--<span class="icon"><img src="../img/icoShangxin@2x.png" alt="店铺"></span>-->
+            <!--<span class="tab-label">店铺</span>-->
+        <!--</a>-->
+        <a id="totour" class="tab-item tour" href="#" data-transition='slide-in'>
+            <span class="icon"><img src="../img/icoShangxin@2x.png" alt="拼团"></span>
+            <span class="tab-label">拼团</span>
+        </a>
+        <a id="totype" class="tab-item classify" href="#" data-transition='slide-in'>
+            <span class="icon"><img src="../img/icoFenlei@2x.png" alt="分类"></span>
+            <span class="tab-label">分类</span>
+        </a>
+        <a id="tome" class="tab-item me" href="#" data-transition='slide-in'>
+            <span class="icon"><img src="../img/icoMe@2x.png" alt="我的"></span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+
+    <!--页面内容-->
+    <div class="content">
+        <!--轮播图-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="banner_detail.html?actId=1&amp;r=0.45061506445555777&amp;version=2000">
+                        <img src="http://qmjsgood.b0.upaiyun.com/20170207/5a3e4f3b57b92021cd714c101366dd32.jpg" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="banner_detail.html?actId=1&amp;r=0.45061506445555777&amp;version=2000">
+                        <img src="http://qmjsgood.b0.upaiyun.com/20170207/5a3e4f3b57b92021cd714c101366dd32.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="box">
+            <div class="today active">
+                <div class="today_con"><img src="../img/icon_fire.png" alt=""><span>今日特卖&nbsp;疯狂抢购</span></div>
+            </div>
+            <div class="tomorrow">明天</div>
+        </div>
+
+        <!--特卖品详细-->
+        <div class="content-block selling_box infinite-scroll infinite-scroll-bottom">
+            <!-- 下面是正文 -->
+            <div class="con-block">
+                <ul class="list_container">
+                    <!--未加入到店铺到商品-->
+                    <li class="ws_li">
+                        <a href=" " class="item-link list-button external">
+                            <div class="li_l">
+                                <img src="http://qmjsgood.b0.upaiyun.com/20161222/345d05ca17e4b69f073b5564bc0798c0.jpg!s" alt="">
+                            </div>
+                            <div class="li_r">
+                                <div class="up_con">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+                                <div class="mid_con">
+                                    <div class="pri_l">
+                                        <p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+                                    </div>
+                                    <div class="pri_r">赚: ¥<span>199</span></div>
+                                </div>
+                                <div class="down_con">
+                                    <div class="sur_l">
+                                        <p class="surplus">
+                                            <span class="span_f"></span>
+                                            <span class="span_s">剩余<span>98</span>个</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                        <div class="sur_r"><img src="../img/icon_shi.png" alt=""></div>
+                    </li>
+
+                    <!--已加入到店铺的商品-->
+                    <li class="lied">
+                        <a href=" " class="item-link list-button external">
+                            <div class="li_l">
+                                <img src="http://qmjsgood.b0.upaiyun.com/20161222/345d05ca17e4b69f073b5564bc0798c0.jpg!s" alt="">
+                            </div>
+                            <div class="li_r">
+                                <div class="up_con">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+                                <div class="mid_con">
+                                    <div class="pri_l">
+                                        <p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+                                    </div>
+                                    <div class="pri_r">赚: ¥<span>19.9</span></div>
+                                </div>
+                                <div class="down_con">
+                                    <div class="sur_l">
+                                        <p class="surplus">
+                                            <span class="span_f"></span>
+                                            <span class="span_s">剩余<span>98</span>个</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                        <div class="sur_r">已添加</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+<!--<script type='text/javascript' src="../js/ws_home.js"></script>-->
+</html>

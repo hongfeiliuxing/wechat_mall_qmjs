@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/offline_cardinfor.css">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+    <script type='text/javascript' src='../js/sm.min.js'></script>
+    <script type='text/javascript' src="../js/base.js"></script>
+</head>
+<body>
+    <div class="page">
+        <div class="content">
+            <!--代核销券-->
+            <div class="big_box">
+                <div class="up_box">
+                    <div class="up_l">供应商：<span>供应商供应商</span></div>
+                    <div class="up_r">未核销</div>
+                </div>
+                <div class="mid_box">
+                     <div class="mid_l"><img src="../img/banner.png" alt=""></div>
+                     <div class="mid_c">
+                          <div class="text_name">页面的基本结构是有要可能会出现样式错误或者无法正确加</div>
+                          <div class="text_data">有效期至：<span>2017-12-24</span></div>
+                     </div>
+                     <div class="mid_r">
+                          <div class="text_pri">&yen;<span>100</span></div>
+                          <div class="text_num">x<span>1</span></div>
+                     </div>
+               </div>
+                <div class="down_box"><span>确定核销</span></div>
+            </div>
+
+            <!--已核销商品券-->
+            <div class="big_box">
+                <div class="up_box">
+                    <div class="up_l">供应商：<span>供应商供应商供应商供应商供应商供应商供应商</span></div>
+                    <div class="up_r">已核销</div>
+                </div>
+                <div class="mid_box">
+                    <div class="mid_l"><img src="../img/banner.png" alt=""></div>
+                    <div class="mid_c">
+                        <div class="text_name">页面的基本结构是有要可能会出现样式错误或者无法正确加</div>
+                        <div class="text_data">核销时间：<span>2017-12-24</span></div>
+                    </div>
+                    <div class="mid_r">
+                        <div class="text_pri">&yen;<span>100</span></div>
+                        <div class="text_num">x<span>1</span></div>
+                    </div>
+                </div>
+                <div class="down_box btn_box"><span>确定</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

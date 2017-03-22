@@ -1,0 +1,26 @@
+// 查看订单
+$("#order-card").click(function(){
+	window.location.href = "../html/order_list.html"
+})
+// 返回首页
+$("#index").click(function(){
+	
+    window.location.href = "../html/home.html"
+})
+
+//返回首页
+$(".back_btn").click(function(){
+    window.location.href = "../html/home.html"
+})
+
+//分享参团
+$(".share_btn").click(function(){
+	var groupId =  xhq.getQuery("groupId") || ""
+	xhq.gotoUrl('../html/tour_goods_share.html',{grouponId:groupId})
+})
+
+
+$(document).ready(function () {
+	var orderNo =  xhq.getQuery("orderNo") || ""
+	$("#orderNo").html(orderNo)
+})

@@ -1,0 +1,57 @@
+// 查看订单
+$("#order-card").click(function(){
+
+	var groupId =  xhq.getQuery("groupId") || ""
+	var orderNo =  xhq.getQuery("orderNo") || ""
+	var channelType =  xhq.getQuery("channelType") || ""
+	
+	if(channelType=='4'){
+		xhq.gotoUrl('../html/tour_goods_share.html',{grouponId:groupId})
+	}else{
+		window.location.href = "../html/order_list.html"
+	}
+})
+// 返回首页
+$("#index").click(function(){
+    window.location.href = "../html/home.html"
+})
+
+////返回首页
+//$(".back_btn").click(function(){
+//    window.location.href = "../html/home.html"
+//})
+//
+////分享参团
+//$(".share_btn").click(function(){
+//	var groupId =  xhq.getQuery("groupId") || ""
+//	xhq.gotoUrl('../html/tour_goods_share.html',{grouponId:groupId})
+//})
+
+
+$(document).ready(function () {
+	var orderNo =  xhq.getQuery("orderNo") || ""
+    var channelType =  xhq.getQuery("channelType") || ""
+     $("#orderNo").html(orderNo)
+    
+	if(channelType=='4'){
+		$("#order-card").html("拼团成功")
+	}else{
+		$("#order-card").html("查看订单")
+	}
+	
+	try{
+		//把下单缓存清空
+		setLocalSession("localOrderSession", "");
+		//从购物车按钮下单的，清除购物车商品信息
+		if(mallType=='gwcgm'){
+			var unCheckShoppingCartLocalSession = getLocalSession("unCheckShoppingCartLocalSession");
+			if(unCheckShoppingCartLocalSession==null || unCheckShoppingCartLocalSession != undefined || unCheckShoppingCartLocalSession!=''){
+				unCheckShoppingCartLocalSession = "";
+			}
+			setLocalSession("shoppingCartLocalSession", unCheckShoppingCartLocalSession)
+		}
+	}catch(err){
+		console.log(err);
+	}
+	
+})

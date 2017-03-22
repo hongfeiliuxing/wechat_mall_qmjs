@@ -1,0 +1,26 @@
+/**
+ * Created by holmes on 2017/1/11.
+ */
+
+
+
+$(function () {
+
+    // 配置轮播图
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+//        nextButton: '.swiper-button-next',
+//        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+
+
+    // 点击弹出拼团规则
+    $(document).on('click','.alert-text',function () {
+        $.alert('这里是拼团规则列表', '温馨提示');
+    });
+})

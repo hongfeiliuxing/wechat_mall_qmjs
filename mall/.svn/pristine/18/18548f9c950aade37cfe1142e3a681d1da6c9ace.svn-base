@@ -1,0 +1,14 @@
+// 查看订单
+$("#order-card").click(function(){
+	window.location.href = "../html/order_list.html"
+})
+// 返回首页
+$("#index").click(function(){
+	
+    window.location.href = "../html/home.html"
+})
+
+$(document).ready(function () {
+	var orderNo =  xhq.getQuery("orderNo") || ""
+	$("#orderNo").html(orderNo)
+})

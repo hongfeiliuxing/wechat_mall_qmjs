@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>店铺管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../css/sm.min.css">
+    <link rel="stylesheet" href="../css/ws_manage_shop.css?version=2001">
+    <script type='text/javascript' src='../js/zepto.min.js'></script>
+	<script type='text/javascript' src='../js/sm.min.js'></script>
+	<script type='text/javascript' src="../js/base.js?version=2001"></script>
+</head>
+<body>
+<div class="page" id="page-ptr">
+    <div class="content">
+        <div class="up_box">
+            <div class="box_l">
+                <div class="img_box">
+                    <img src="" alt="" id="input_image">
+                </div>
+            </div>
+
+            <div class="box_m">
+                <div class="ship_box">
+                    <span id="input_level"></span>
+                    <span id="input_sname"></span>
+                </div>
+            </div>
+            <div class="box_r"><img src="../img/icon_dian@1x.png" alt=""></div>
+        </div>
+
+        <div class="content-block selling_box infinite-scroll infinite-scroll-bottom">
+            <!-- 下面是正文 -->
+            <div class="con-block">
+                <ul class="list_container">
+                    
+                </ul>
+            </div>
+
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+        <div class="cover" style="display: none;">
+            <div class="dialog_window">
+                <div class="window_content">你确定要删除这个商品吗？</div>
+                <div class="window_footer">
+                    <div class="btn_cancle">取消</div>
+                    <div class="btn_confirm">确定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type='text/javascript' src="../js/ws_manage_shop.js?version=2002"></script>
+</html>

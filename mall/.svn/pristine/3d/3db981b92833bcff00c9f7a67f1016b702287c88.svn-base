@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>活动详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/sm.min.css">
+		<link rel="stylesheet" href="../css/banner_detail.css?version=2001">
+		<script type='text/javascript' src='../js/zepto.min.js'></script>
+		<script type='text/javascript' src='../js/sm.min.js'></script>
+		<script type='text/javascript' src='../js/base.js?version=2001'></script>
+	</head>
+
+	<body>
+		<div class="page" id="page-ptr">
+			<div class="content">
+				<!--h5区域还未确定内容-->
+				<div class="sale_box" id="actContent"></div>
+
+				<!--活动内商品-->
+				<div class="sale_list">
+					<div class="up_list">
+						<div class="hd_ico"><img src="../img/huodongnei.png" alt=""></div>
+						<div class="hd_text">
+							<p>活动内商品<br><span>FOR SALE</span></p>
+						</div>
+					</div>
+					<div class="con_list">
+						<ul class="list_container">
+							<!--未加入到店铺到商品-->
+							<li class="ws_li">
+								<a href="goods_detail.html?onlineId=111&amp;version=2000" class="item-link list-button external" data-transition="slide-in">
+									<div class="selling_pic"><img src="http://qmjsgood.b0.upaiyun.com/20170213/dab741f5fbda3aff974dad87130275aa.jpg!s"></div>
+									<div class="selling_text">
+										<div class="selling_title">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+										<div class="selling_price">
+											<div class="pri_l">
+												<p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+											</div>
+											<div class="pri_r">赚: ¥<span>1999</span></div>
+										</div>
+										<div class="go_buy">
+											<div class="sur_l">
+												<p class="surplus" status="1" totalstock="100" stock="98"><span class="span_f" style="width:4.05rem;border-radius: 8px 0 0 8px"></span><span class="span_s">剩余<span>98</span>个</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</a>
+								<div class="sur_r"><img src="../img/icon_shi.png" alt=""></div>
+							</li>
+
+							<!--已加入到店铺的商品-->
+							<li class="lied">
+								<a href="goods_detail.html?onlineId=111&amp;version=2000" class="item-link list-button external" data-transition="slide-in">
+									<div class="selling_pic"><img src="http://qmjsgood.b0.upaiyun.com/20170213/dab741f5fbda3aff974dad87130275aa.jpg!s"></div>
+									<div class="selling_text">
+										<div class="selling_title">减肥健身室内自行车 炫酷黑/高贵白2色 </div>
+										<div class="selling_price">
+											<div class="pri_l">
+												<p>¥<span class="pri_one">1999</span><s>¥<span class="pri_two">2999</span></s></p>
+											</div>
+											<div class="pri_r">赚: ¥<span>1999</span></div>
+										</div>
+										<div class="go_buy">
+											<div class="sur_l">
+												<p class="surplus" status="1" totalstock="100" stock="98"><span class="span_f" style="width:4.05rem;border-radius: 8px 0 0 8px"></span><span class="span_s">剩余<span>98</span>个</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</a>
+								<div class="sur_r">已添加</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type='text/javascript' src='../js/banner_detail.js?version=2001'></script>
+
+</html>
